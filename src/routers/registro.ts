@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { registroGet, registroPost } from "../controllers/auth/registro";
+import { registroGet, registroPost } from "../controllers/auth";
 
 router.get("/", registroGet);
 

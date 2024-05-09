@@ -12,10 +12,10 @@ app.use(express.json());
 
 //Conexión a la base de datos
 
-import sequelize from './src/config/db-conenction';
+import sequelize from "./src/config/db-conenction";
 
 sequelize.sync({ logging: false }).then(() => {
-    console.log("db conectada!");
+  console.log("db conectada!");
 });
 
 // Configura EJS como el motor de plantillas
@@ -24,10 +24,11 @@ app.set("view engine", "ejs");
 // Configura la ruta a las vistas
 app.set("views", path.join(__dirname, "/src/views"));
 
-import { inicioRouter, registroRouter } from "./src/routers/index";
+import { inicioRouter, registroRouter, loginRouter } from "./src/routers/index";
 
 app.use("/", inicioRouter);
 app.use("/registro", registroRouter);
+app.use("/login", loginRouter);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

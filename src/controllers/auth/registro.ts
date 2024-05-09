@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import { validarCapchat, generarToken } from "./fn/fn";
+import { validarCapchat, generarToken } from "./fn";
 
 import { Request, Response } from "express";
 
@@ -42,7 +42,7 @@ const registroPost = async (req: Request, res: Response) => {
     esEstudiante: true,
   })
     .then((usuario) => {
-      console.log("Usuario creado:", usuario);
+      // console.log("Usuario creado:", usuario);
 
       const token = generarToken(usuario);
 
