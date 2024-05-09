@@ -1,3 +1,7 @@
+import bcrypt from "bcrypt";
+
+import { validarCapchat, generarToken } from "./fn/fn";
+
 import { Request, Response } from "express";
 
 import { Usuario } from "../../models/models";
@@ -5,11 +9,16 @@ import { Usuario } from "../../models/models";
 const registroGet = async (req: Request, res: Response): Promise<void> => {
   res.render("registro");
 };
+
 const registroPost = async (req: Request, res: Response) => {
-  const { cedula, correo, contrasena, esAdmin } = req.body;
+  const { cedula, correo, contrasena, esAdmin, captcha } = req.body;
 
   if (!cedula || !correo || !contrasena) {
     return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
+  }
+
+  if (!validarCapchat(captcha)) {
+    return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 
   if (esAdmin) {
@@ -27,13 +36,18 @@ const registroPost = async (req: Request, res: Response) => {
   }
 
   Usuario.create({
-    cedula: cedula,
-    correo: correo,
-    contrasena: contrasena,
+    cedula,
+    correo,
+    contrasena: bcrypt.hashSync(contrasena, 10),
     esEstudiante: true,
   })
     .then((usuario) => {
-      res.status(201).json(usuario);
+      console.log("Usuario creado:", usuario);
+
+      const token = generarToken(usuario);
+
+      // Envía el token en la respuesta
+      res.status(201).json({ token });
     })
     .catch((err) => {
       console.error("Hubo un error al crear el usuario:", err);
