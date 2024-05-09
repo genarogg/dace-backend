@@ -1,0 +1,34 @@
+import express from "express";
+import path from "path";
+
+import dotenv from "dotenv";
+dotenv.config();
+const { PORT } = process.env;
+
+const app = express();
+
+// Middleware para decodificar el cuerpo de las solicitudes POST
+app.use(express.json());
+
+//Conexión a la base de datos
+
+import sequelize from './src/config/db-conenction';
+
+sequelize.sync({ logging: false }).then(() => {
+    console.log("db conectada!");
+});
+
+// Configura EJS como el motor de plantillas
+app.set("view engine", "ejs");
+
+// Configura la ruta a las vistas
+app.set("views", path.join(__dirname, "/src/views"));
+
+import { inicioRouter, registroRouter } from "./src/routers/index";
+
+app.use("/", inicioRouter);
+app.use("/registro", registroRouter);
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
