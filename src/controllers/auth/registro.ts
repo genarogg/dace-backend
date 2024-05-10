@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 
-import { validarCapchat, generarToken } from "./fn";
+import { validarCapchat, generarToken, registrarInicio } from "./fn";
 
 import { Request, Response } from "express";
 
-import { Usuario } from "../../models/models";
+import { Usuario } from "../../models";
 
 const registroGet = async (req: Request, res: Response): Promise<void> => {
   res.render("registro");
@@ -28,7 +28,7 @@ const registroPost = async (req: Request, res: Response) => {
     return;
   }
 
-  const usuario = await Usuario.findByPk(cedula);
+  const usuario = await Usuario.findOne({ where: { cedula: cedula } });
 
   if (usuario) {
     // El usuario ya existe, envía una respuesta indicando que es duplicado
@@ -46,6 +46,7 @@ const registroPost = async (req: Request, res: Response) => {
 
       const token = generarToken(usuario);
 
+      registrarInicio(req, usuario.id);
       // Envía el token en la respuesta
       res.status(201).json({ token });
     })

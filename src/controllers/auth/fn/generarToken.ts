@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 interface Usuario {
   correo: string;
   cedula: Number;
+  id: Number;
   esEstudiante: boolean;
   esProfesor: boolean;
   esAdmin: boolean;
@@ -14,13 +15,12 @@ function generarToken(usuario: Usuario) {
 
   const token = jwt.sign(
     {
+      id: usuario.id,
       correo: usuario.correo,
-      cedula: usuario.cedula,
-      esEstudiante: usuario.esEstudiante,
-      esProfesor: usuario.esProfesor,
-      esAdmin: usuario.esAdmin,
     },
+
     JWTSECRETO,
+
     {
       expiresIn: JWTTIEMPO,
     }

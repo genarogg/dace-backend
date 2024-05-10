@@ -18,11 +18,12 @@ Usuario.init(
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
     },
     cedula: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
     },
     correo: {
       type: DataTypes.STRING,
