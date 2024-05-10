@@ -54,6 +54,10 @@ Usuario.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "active",
+    },
   },
   {
     tableName: "usuarios",
