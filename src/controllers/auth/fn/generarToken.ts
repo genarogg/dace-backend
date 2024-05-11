@@ -13,10 +13,15 @@ function generarToken(usuario: Usuario) {
   const JWTSECRETO = process.env.JWTSECRETO || "jwt-secret";
   const JWTTIEMPO = process.env.JWTTIEMPO || "1h";
 
+  const { id, correo, esEstudiante, esProfesor, esAdmin } = usuario;
+
   const token = jwt.sign(
     {
-      id: usuario.id,
-      correo: usuario.correo,
+      id: id,
+      correo: correo,
+      esEstudiante: esEstudiante,
+      esProfesor: esProfesor,
+      esAdmin: esAdmin,
     },
 
     JWTSECRETO,

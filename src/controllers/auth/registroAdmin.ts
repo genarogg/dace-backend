@@ -34,9 +34,10 @@ const registroAdmin = async (req: Request, res: Response) => {
     esAdmin,
   })
     .then((usuario) => {
+      
       registrarInicio(req, usuario.id);
       // Envía el token en la respuesta
-      res.status(201).json({ mensaje: "usuario creado" });
+      res.status(201).json({ mensaje: "usuario creado", });
     })
     .catch((err) => {
       console.error("Hubo un error al crear el usuario:", err);

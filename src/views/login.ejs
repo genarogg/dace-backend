@@ -50,7 +50,17 @@
       body: JSON.stringify({ correo, contrasena, captcha: token }),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        // Asegúrate de que el token existe en la respuesta
+        if (data.token) {
+          // Guarda el token en el localStorage
+          localStorage.setItem("token", data.token);
+
+          // Redirige al usuario a la página de inicio
+          window.location.href = "/admin";
+        }
+      })
       .catch((error) => {
         console.error("Error:", error);
       });
