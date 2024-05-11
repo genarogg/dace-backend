@@ -1,7 +1,8 @@
 import { Usuario } from "../models";
 import crearUsuario from "./crearUsuarios";
+import crearAdmin from "./crearAdmin";
 
-const dataFakeGeneration = async (cantidad: number) => {
+const dataFakeGeneration = async (url: string, cantidad: number) => {
   if (!(process.env.NODE_ENV === "dev")) {
     console.log("No se puede ejecutar en producción");
     return;
@@ -16,8 +17,9 @@ const dataFakeGeneration = async (cantidad: number) => {
       return;
     }
   } catch (error) {}
-
-  await crearUsuario(cantidad);
+  
+  await crearAdmin(url);
+  await crearUsuario(url, cantidad);
 };
 
 export default dataFakeGeneration;

@@ -19,7 +19,6 @@ Usuario.init(
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
-      allowNull: false,
       primaryKey: true,
     },
 
@@ -36,6 +35,7 @@ Usuario.init(
     cedula: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      //unique: true,
     },
     contrasena: {
       type: DataTypes.STRING,
@@ -55,8 +55,8 @@ Usuario.init(
     //datos de contacto
     correo: {
       type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
+      //unique: true,
+      allowNull: true,
     },
 
     telefono: {
@@ -108,12 +108,11 @@ Usuario.init(
     fechaDeCreacion: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-      allowNull: false,
     },
   },
   {
     tableName: "usuarios",
-    sequelize: sequelize, // this bit is important
+    sequelize: sequelize,
   }
 );
 

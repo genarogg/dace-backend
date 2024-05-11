@@ -31,7 +31,8 @@ app.use("/registro", registroRouter);
 app.use("/login", loginRouter);
 
 import dataFakeGeneration from "./src/dataFakeGeneration/index";
-dataFakeGeneration(20);
+
+dataFakeGeneration("http://localhost:8000", 5);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

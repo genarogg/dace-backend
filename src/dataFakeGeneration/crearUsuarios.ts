@@ -1,4 +1,4 @@
-const crearUsuarios = async (cantidad: number) => {
+const crearUsuarios = async (url: string,cantidad: number) => {
   for (let i = 1; i <= cantidad; i++) {
     const usuario = {
       cedula: i,
@@ -12,7 +12,7 @@ const crearUsuarios = async (cantidad: number) => {
       captcha: "6Le2S9cpAAAAACwmjzPeDgR7AuS64D-fI5KAOouw",
     };
 
-    await fetch("http://localhost:8000/registro", {
+    await fetch(`${url}/registro`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

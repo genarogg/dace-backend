@@ -1,33 +1,23 @@
 import bcrypt from "bcrypt";
 
-import { validarCapchat, generarToken, registrarInicio } from "./fn";
+import { registrarInicio } from "./fn";
 
 import { Request, Response } from "express";
 
 import { Usuario } from "../../models";
 
-const registroGet = async (req: Request, res: Response): Promise<void> => {
-  res.render("registro");
-};
+const registroAdmin = async (req: Request, res: Response) => {
+  const { cedula, correo, contrasena, contrasenaEndpoint, esAdmin } = req.body;
+ 
 
-const registroPost = async (req: Request, res: Response) => {
-  const { cedula, correo, contrasena, esAdmin, esProfesor, captcha } = req.body;
-
-  if (esAdmin || esProfesor) {
+  if (contrasenaEndpoint !== process.env.CONTRASENA_ENDPOINT_REGISTRO_ADMIN) {
     return res.status(400).send({
-      error:
-        "Solo se puede registrar un usuario estudiante desde este endpoint.",
+      error: "Credenciales invalidas para utilizar este endpoint.",
     });
   }
 
-  if (!cedula || !correo || !contrasena || !captcha) {
+  if (!cedula || !correo) {
     return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
-  }
-
-  const captchaResponse = await validarCapchat(captcha);
-
-  if (captchaResponse) {
-    return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 
   const usuario = await Usuario.findOne({ where: { cedula: cedula } });
@@ -36,21 +26,17 @@ const registroPost = async (req: Request, res: Response) => {
     // El usuario ya existe, envía una respuesta indicando que es duplicado
     return res.status(400).json({ error: "Usuario duplicado" });
   }
-
+  console.log("llegue");
   Usuario.create({
     cedula,
     correo,
     contrasena: bcrypt.hashSync(contrasena, 10),
-    esEstudiante: true,
+    esAdmin,
   })
     .then((usuario) => {
-      // console.log("Usuario creado:", usuario);
-
-      const token = generarToken(usuario);
-
       registrarInicio(req, usuario.id);
       // Envía el token en la respuesta
-      res.status(201).json({ token });
+      res.status(201).json({ mensaje: "usuario creado" });
     })
     .catch((err) => {
       console.error("Hubo un error al crear el usuario:", err);
@@ -58,4 +44,4 @@ const registroPost = async (req: Request, res: Response) => {
     });
 };
 
-export { registroGet, registroPost };
+export { registroAdmin };
