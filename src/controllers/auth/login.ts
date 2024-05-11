@@ -13,7 +13,9 @@ const loginGet = async (req: Request, res: Response): Promise<void> => {
 const loginPost = async (req: Request, res: Response) => {
   const { correo, contrasena, captcha } = req.body;
 
-  if (!validarCapchat(captcha)) {
+  const captchaResponse = await validarCapchat(captcha);
+
+  if (captchaResponse) {
     return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 

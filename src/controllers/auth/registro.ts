@@ -17,7 +17,9 @@ const registroPost = async (req: Request, res: Response) => {
     return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
   }
 
-  if (!validarCapchat(captcha)) {
+  const captchaResponse = await validarCapchat(captcha);
+
+  if (captchaResponse) {
     return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 

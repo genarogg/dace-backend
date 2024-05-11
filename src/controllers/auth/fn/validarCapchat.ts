@@ -17,6 +17,8 @@ const validarCapchat = async (captcha: string) => {
     console.log("Captcha no válido");
     return false;
   }
+
+  return data.success;
 };
 
 export default validarCapchat;

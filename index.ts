@@ -31,7 +31,7 @@ app.use("/registro", registroRouter);
 app.use("/login", loginRouter);
 
 import dataFakeGeneration from "./src/dataFakeGeneration/index";
-dataFakeGeneration(100);
+dataFakeGeneration(20);
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

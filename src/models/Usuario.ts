@@ -11,6 +11,7 @@ class Usuario extends Model {
   public esProfesor!: boolean;
   public esAdmin!: boolean;
   public sede!: string;
+  public carrera!: string[];
 }
 
 Usuario.init(
@@ -37,6 +38,16 @@ Usuario.init(
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    carrera: {
+      type: DataTypes.STRING,
+      get: function () {
+        return JSON.parse(this.getDataValue("carrera"));
+      },
+      set: function (val) {
+        return this.setDataValue("carrera", JSON.stringify(val));
+      },
+      allowNull: true,
     },
     esEstudiante: {
       type: DataTypes.BOOLEAN,
