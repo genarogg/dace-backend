@@ -13,14 +13,14 @@ const loginGet = async (req: Request, res: Response): Promise<void> => {
 const loginPost = async (req: Request, res: Response) => {
   const { correo, contrasena, captcha } = req.body;
 
-  const captchaResponse = await validarCapchat(captcha);
-
-  if (captchaResponse) {
-    return res.status(200).json({ mensaje: "Captcha no válido." });
+  if (!correo || !contrasena || !captcha) {
+    return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
   }
 
-  if (!correo || !contrasena) {
-    return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
+  const captchaResponse = await validarCapchat(captcha);
+
+  if (!captchaResponse) {
+    return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 
   const usuario = await Usuario.findOne({ where: { correo } });

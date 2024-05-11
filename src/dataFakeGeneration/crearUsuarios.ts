@@ -1,7 +1,4 @@
-
-
 const crearUsuarios = async (cantidad: number) => {
-  
   for (let i = 1; i <= cantidad; i++) {
     const usuario = {
       cedula: i,
@@ -12,6 +9,7 @@ const crearUsuarios = async (cantidad: number) => {
       esAdmin: i % 5 === 0, // true para múltiplos de 5
       sede: `sede${i}`,
       status: "active",
+      captcha: "6Le2S9cpAAAAACwmjzPeDgR7AuS64D-fI5KAOouw",
     };
 
     await fetch("http://localhost:8000/registro", {

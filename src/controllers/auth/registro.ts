@@ -13,7 +13,14 @@ const registroGet = async (req: Request, res: Response): Promise<void> => {
 const registroPost = async (req: Request, res: Response) => {
   const { cedula, correo, contrasena, esAdmin, captcha } = req.body;
 
-  if (!cedula || !correo || !contrasena) {
+  if (esAdmin) {
+    res.status(400).send({
+      error: "No se puede registrar un usuario admin desde este endpoint.",
+    });
+    return;
+  }
+
+  if (!cedula || !correo || !contrasena || !captcha) {
     return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
   }
 
@@ -21,13 +28,6 @@ const registroPost = async (req: Request, res: Response) => {
 
   if (captchaResponse) {
     return res.status(200).json({ mensaje: "Captcha no válido." });
-  }
-
-  if (esAdmin) {
-    res.status(400).send({
-      error: "No se puede registrar un usuario admin desde este endpoint.",
-    });
-    return;
   }
 
   const usuario = await Usuario.findOne({ where: { cedula: cedula } });

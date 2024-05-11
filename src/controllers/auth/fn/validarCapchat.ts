@@ -13,11 +13,6 @@ const validarCapchat = async (captcha: string) => {
 
   const data = await response.json();
 
-  if (!data.success) {
-    console.log("Captcha no válido");
-    return false;
-  }
-
   return data.success;
 };
 
