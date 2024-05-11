@@ -22,23 +22,54 @@ Usuario.init(
       allowNull: false,
       primaryKey: true,
     },
+
+    //datos del usuario
+
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    apellido: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     cedula: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    correo: {
-      type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
     },
     contrasena: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+
+    genero: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
+
+    fechaDeNacimiento: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+
+    //datos de contacto
+    correo: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+
+    telefono: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    direccion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    //datos institucionales
     carrera: {
       type: DataTypes.STRING,
       get: function () {
@@ -49,6 +80,17 @@ Usuario.init(
       },
       allowNull: true,
     },
+
+    sede: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "active",
+    },
+
+    // roles
     esEstudiante: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -61,13 +103,12 @@ Usuario.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    sede: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    status: {
-      type: DataTypes.STRING,
-      defaultValue: "active",
+
+    //otros
+    fechaDeCreacion: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
     },
   },
   {

@@ -20,14 +20,6 @@ RegistroInicioSesion.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
-    correo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    cedula: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
 
     fecha: {
       type: DataTypes.DATE,
@@ -35,15 +27,11 @@ RegistroInicioSesion.init(
       allowNull: false,
     },
 
-    rool: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
     ip: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    
     userAgent: {
       type: DataTypes.STRING,
       allowNull: false,
