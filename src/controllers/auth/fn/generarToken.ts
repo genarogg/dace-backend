@@ -9,7 +9,7 @@ interface Usuario {
   esAdmin: boolean;
 }
 
-function generarToken(usuario: Usuario) {
+const generarToken = (usuario: Usuario) => {
   const JWTSECRETO = process.env.JWTSECRETO || "jwt-secret";
   const JWTTIEMPO = process.env.JWTTIEMPO || "1h";
 
@@ -17,11 +17,11 @@ function generarToken(usuario: Usuario) {
 
   const token = jwt.sign(
     {
-      id: id,
-      correo: correo,
-      esEstudiante: esEstudiante,
-      esProfesor: esProfesor,
-      esAdmin: esAdmin,
+      id,
+      correo,
+      esEstudiante,
+      esProfesor,
+      esAdmin,
     },
 
     JWTSECRETO,
@@ -32,6 +32,6 @@ function generarToken(usuario: Usuario) {
   );
 
   return token;
-}
+};
 
 export default generarToken;

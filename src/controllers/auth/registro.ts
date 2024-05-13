@@ -26,7 +26,7 @@ const registroPost = async (req: Request, res: Response) => {
 
   const captchaResponse = await validarCapchat(captcha);
 
-  if (captchaResponse) {
+  if (!captchaResponse) {
     return res.status(200).json({ mensaje: "Captcha no válido." });
   }
 
