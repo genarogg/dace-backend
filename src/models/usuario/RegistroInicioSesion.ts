@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import sequelize from "../config/db-conenction";
+import sequelize from "../../config/db-conenction";
 
 class RegistroInicioSesion extends Model {
   public id!: number;
