@@ -12,6 +12,7 @@ const loginGet = async (req: Request, res: Response): Promise<void> => {
 
 const loginPost = async (req: Request, res: Response) => {
   const { correo, contrasena, captcha } = req.body;
+  
   if (!correo || !contrasena || !captcha) {
     return res.status(200).json({ mensaje: "Faltan campos obligatorios." });
   }

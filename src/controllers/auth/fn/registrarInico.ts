@@ -1,5 +1,4 @@
-import { RegistroInicioSesion } from "../../../models";
-import { Usuario } from "../../../models";
+import { RegistroInicioSesion, Usuario } from "../../../models";
 
 const registrarInicio = async (req: any, id: any) => {
   const usuario = await Usuario.findByPk(id);
@@ -9,8 +8,6 @@ const registrarInicio = async (req: any, id: any) => {
   }
 
   const { cedula, correo, esEstudiante, esProfesor, esAdmin } = usuario;
-
-  console.log(esEstudiante, esProfesor, esAdmin);
 
   RegistroInicioSesion.create({
     usuarioId: id,
