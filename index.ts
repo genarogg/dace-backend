@@ -24,11 +24,18 @@ app.set("view engine", "ejs");
 // Configura la ruta a las vistas
 app.set("views", path.join(__dirname, "/src/views"));
 
-import { inicioRouter, registroRouter, loginRouter } from "./src/routers/index";
+import {
+  inicioRouter,
+  registroRouter,
+  loginRouter,
+  carreraRouter,
+} from "./src/routers/index";
 
 app.use("/", inicioRouter);
 app.use("/registro", registroRouter);
 app.use("/login", loginRouter);
+
+app.use("/admin", carreraRouter);
 
 import dataFakeGeneration from "./src/dataFakeGeneration/index";
 
