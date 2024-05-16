@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { Carrera, Usuario, RegistroCarrera } from "../../models"; // Asegúrate de importar tu modelo de Usuario
 
-import { toCamelCase } from "@fn/hola";
+import { toCamelCase } from "../../functions";
 
 const addCarreraGet = (req: Request, res: Response): void => {
   res.render("admin/carrera/addCarrera");

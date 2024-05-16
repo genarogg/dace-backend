@@ -6,6 +6,7 @@
     "start": "ts-node index.ts",
     "json-db": "json-server --watch src/config/db.json -p 8001",
     "dev": "concurrently \"ts-node-dev --respawn --transpile-only index.ts\" \"npm run json-db\"",
+    "dev2": "nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
+    "nodemon": "^3.1.0",
     "sequelize-cli": "^6.6.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0"
