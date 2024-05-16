@@ -1,0 +1,91 @@
+<%- include('../../global/header.ejs') %>
+<form id="miFormulario">
+  <div class="container-fluid mt-1">
+    <%- include('./components/header.ejs') %>
+    <table id="miTabla" class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>CÓD. ASIGNATURA</th>
+          <th>ASIGNATURA</th>
+          <th>HORAS TEÓRICAS</th>
+          <th>HORAS PRÁCTICAS</th>
+          <th>HORAS SEMANALES</th>
+          <th>U.C</th>
+          <th>PRELACIONES</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- <button type="submit" class="btn btn-success">Enviar</button> -->
+  </div>
+</form>
+
+<button onclick="recogerDatosFormulario()">recoger datos</button>
+
+<script>
+  function recogerDatosFormulario() {
+    let formulario = document.getElementById("miFormulario");
+    let filas = formulario.querySelectorAll("tbody tr");
+    let nombreCarrera = formulario.querySelector("#carreraSelect").value;
+    let datosFormulario = {};
+
+    datosFormulario[nombreCarrera] = {};
+
+    let semestreActual = null;
+
+    for (let i = 0; i < filas.length; i++) {
+      let fila = filas[i];
+
+      let periodo = fila.querySelector('input[name="semestre"]');
+      let codigoAsignaturaInput = fila.querySelector(
+        'input[name="codigoAsignatura"]'
+      );
+      let asignaturaInput = fila.querySelector('input[name="asignatura"]');
+      let horasTeoricasInput = fila.querySelector(
+        'input[name="horasTeoricas"]'
+      );
+      let horasPracticasInput = fila.querySelector(
+        'input[name="horasPracticas"]'
+      );
+      let horasSemanalesInput = fila.querySelector(
+        'input[name="horasSemanales"]'
+      );
+      let ucInput = fila.querySelector('input[name="uc"]');
+      let prelacionesInput = fila.querySelector('input[name="prelaciones"]');
+
+      if (periodo && periodo.value) {
+        semestreActual = periodo.value;
+        datosFormulario[nombreCarrera][semestreActual] = {};
+      } else if (
+        semestreActual &&
+        codigoAsignaturaInput &&
+        asignaturaInput &&
+        horasTeoricasInput &&
+        horasPracticasInput &&
+        horasSemanalesInput &&
+        ucInput &&
+        prelacionesInput
+      ) {
+        let asignatura = {
+          codigo: codigoAsignaturaInput.value,
+          nombre: asignaturaInput.value,
+          horasTeoricas: horasTeoricasInput.value,
+          horasPracticas: horasPracticasInput.value,
+          horasSemanales: horasSemanalesInput.value,
+          uc: ucInput.value,
+          prelaciones: prelacionesInput.value,
+        };
+
+        datosFormulario[nombreCarrera][semestreActual][
+          asignatura.codigo
+        ] = asignatura;
+      }
+    }
+
+    console.log(datosFormulario);
+
+    return datosFormulario;
+  }
+</script>

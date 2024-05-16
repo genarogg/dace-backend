@@ -19,6 +19,7 @@ Carrera.init(
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
 
     pensumCode: {

@@ -1,0 +1,67 @@
+<div class="header mb-3">
+  
+    <%- include('./carreras.ejs') %>
+
+  <button type="button" id="agregarSemestre" class="btn btn-primary mr-2">
+    Agregar Semestre
+  </button>
+
+  <button type="button" id="agregarYear" class="btn btn-primary mr-2">
+    Agregar año
+  </button>
+
+  <button type="button" id="agregarAsignatura" class="btn btn-primary mr-2">
+    Agregar Asignatura
+  </button>
+</div>
+
+<script>
+  document
+    .getElementById("agregarSemestre")
+    .addEventListener("click", function () {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input type="text" name="semestre" value="semestre N" /></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button type="button" class="btn btn-danger" onclick="this.parentNode.parentNode.remove()">Eliminar</button></td>
+      `;
+      document.querySelector("#miTabla tbody").appendChild(tr);
+    });
+
+  document.getElementById("agregarYear").addEventListener("click", function () {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td><input type="text" name="year" value="año N" /></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button type="button" class="btn btn-danger" onclick="this.parentNode.parentNode.remove()">Eliminar</button></td>
+      `;
+    document.querySelector("#miTabla tbody").appendChild(tr);
+  });
+
+  document
+    .getElementById("agregarAsignatura")
+    .addEventListener("click", function () {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input type="text" name="codigoAsignatura" /></td>
+        <td><input type="text" name="asignatura" /></td>
+        <td><input type="text" name="horasTeoricas" /></td>
+        <td><input type="text" name="horasPracticas" /></td>
+        <td><input type="text" name="horasSemanales" /></td>
+        <td><input type="text" name="uc" /></td>
+        <td><input type="text" name="prelaciones" /></td>
+        <td><button type="button" class="btn btn-danger" onclick="this.parentNode.parentNode.remove()">Eliminar</button></td>
+      `;
+      document.querySelector("#miTabla tbody").appendChild(tr);
+    });
+</script>

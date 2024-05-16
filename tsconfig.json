@@ -1,16 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "esnext",
     "module": "commonjs",
-
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
     "strict": true,
-
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@router/*": ["src/routers/*"]
-    }
-  }
+      "@/*": ["src/*"],
+      "@test/*": ["test/*"],
+    },
+  },
+  "include": [
+    "./*.js",
+    "src/**/*.ts",
+    "test/**/*.ts",
+  ],
 }
