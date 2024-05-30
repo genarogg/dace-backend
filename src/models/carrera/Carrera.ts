@@ -3,6 +3,13 @@ import sequelize from "../../config/db-conenction";
 
 class Carrera extends Model {
   public id!: number;
+  public nombre!: string;
+  public pensumCode!: string;
+  public semestral!: boolean;
+  public anual!: boolean;
+  public estado!: boolean;
+  public creditosTotales!: number;
+  public facultad!: string;
   public usuarioId!: number;
   public fecha!: Date;
   public ip!: string;

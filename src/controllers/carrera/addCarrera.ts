@@ -9,7 +9,7 @@ const addCarreraGet = (req: Request, res: Response): void => {
 };
 
 const addCarreraPost = async (req: Request, res: Response): Promise<any> => {
-  const { nombre, pensumCode, estado, facultad, periodo } = req.body;
+  const { nombre, estado, facultad, periodo } = req.body;
   const { correo } = req.body.user;
 
   const usuario = await Usuario.findOne({ where: { correo } });

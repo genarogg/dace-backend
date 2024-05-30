@@ -1,7 +1,17 @@
 <%- include('../../global/header.ejs') %>
-
 <div class="container py-5" style="max-width: 360px;">
   <form>
+    <div class="form-group">
+      <label for="carrera">Carrera:</label>
+      <select id="carrera" name="carrera" class="form-control">
+        <% data.forEach(carrera => { %>
+        <option value="<%= carrera.dataValues.id %>"
+          ><%= carrera.dataValues.nombre %></option
+        >
+        <% }) %>
+      </select>
+    </div>
+
     <div class="form-group">
       <label for="nombre">Nombre:</label>
       <input
@@ -50,7 +60,9 @@
       <%- include("./components/facultades.ejs") %>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">Agregar Carrera</button>
+    <button type="submit" class="btn btn-primary mt-3">
+      Actualizar Carrera
+    </button>
   </form>
 </div>
 
@@ -63,8 +75,10 @@
 
     const token = localStorage.getItem("token");
 
-    fetch("/admin/carrera/add-carrera", {
-      method: "POST",
+    console.log(data)
+
+    fetch(`/admin/carrera/update-carrera/${data.carrera}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

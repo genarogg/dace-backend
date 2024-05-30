@@ -5,6 +5,8 @@ import {
   addCarreraPost,
   addPensumGet,
   addPensumPost,
+  updateCarreraGet,
+  updateCarreraPut,
 } from "../../controllers/carrera";
 
 import checkRole from "../middleware/checkRole";
@@ -20,5 +22,8 @@ router.get("/carrera/add-pensum", checkRole("esAdmin"), addPensumPost);
 
 router.get("/carrera/add-carrera", addCarreraGet);
 router.post("/carrera/add-carrera", checkRole("esAdmin"), addCarreraPost);
+
+router.get("/carrera/update-carrera", updateCarreraGet);
+router.put("/carrera/update-carrera/:id", checkRole("esAdmin"), updateCarreraPut);
 
 export default router;
