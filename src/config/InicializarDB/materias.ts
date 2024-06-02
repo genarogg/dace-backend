@@ -34,9 +34,9 @@ const populateMaterias = async () => {
     // Si la materia no existe, entonces la inserta
     if (!existingMateria) {
       await Materia.create(materia)
-        .then(() =>
-          console.log(`Materia ${materia.nombre} creada exitosamente`)
-        )
+        .then(() =>{
+          /* console.log(`Materia ${materia.nombre} creada exitosamente`) */
+        })
         .catch((error) =>
           console.error(`Error al crear la materia ${materia.nombre}:`, error)
         );

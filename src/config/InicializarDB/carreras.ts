@@ -17,9 +17,9 @@ const populateCarreras = async () => {
       // Si la carrera no existe, entonces la inserta
       if (!existingCarrera) {
         await Carrera.create(carrera)
-          .then(() =>
-            console.log(`Carrera ${carrera.nombre} creada exitosamente`)
-          )
+          .then(() => {
+            /* console.log(`Carrera ${carrera.nombre} creada exitosamente`) */
+          })
           .catch((error) =>
             console.error(`Error al crear la carrera ${carrera.nombre}:`, error)
           );
