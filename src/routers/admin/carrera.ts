@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/carrera/add-pensum", addPensumGet);
-router.get("/carrera/add-pensum", checkRole("esAdmin"), addPensumPost);
+router.post("/carrera/add-pensum", checkRole("esAdmin"), addPensumPost);
 
 router.get("/carrera/add-carrera", addCarreraGet);
 router.post("/carrera/add-carrera", checkRole("esAdmin"), addCarreraPost);

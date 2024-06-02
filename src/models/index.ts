@@ -4,4 +4,14 @@ import RegistroInicioSesion from "./usuario/RegistroInicioSesion";
 import Carrera from "./carrera/Carrera";
 import RegistroCarrera from "./carrera/RegistroDeCarrera";
 
-export { Usuario, RegistroInicioSesion, Carrera, RegistroCarrera };
+import Materia from "./materia/Materia";
+import Inscripcion from "./materia/Inscripcion";
+
+export {
+  Usuario,
+  RegistroInicioSesion,
+  Carrera,
+  RegistroCarrera,
+  Materia,
+  Inscripcion,
+};

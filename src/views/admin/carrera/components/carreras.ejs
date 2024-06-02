@@ -1,8 +1,8 @@
 <div class="container-fluid d-flex align-items-center">
-    <select id="carreraSelect" class="form-control mb-3 mr-2">
-      <option value="ingInformatica">Ing. Informática</option>
-      <option value="ingAgronoma">Ing. Agrónoma</option>
-      <option value="medicina">Medicina</option>
-    </select>
-    <a href="/admin/carrera/add-carrera" class="btn btn-primary">Agregar carrera</a>
-  </div>
+  <select id="carreraSelect" class="form-control mb-3 mr-2">
+    <% data.forEach(carrera => { %>
+    <option value="<%= carrera.dataValues.pensumCode %>"><%= carrera.dataValues.nombre %></option>
+    <% }) %>
+  </select>
+  <a href="/admin/carrera/add-carrera" class="btn btn-primary">Agregar carrera</a>
+</div>

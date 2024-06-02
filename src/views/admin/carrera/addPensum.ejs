@@ -18,7 +18,7 @@
       <tbody></tbody>
     </table>
 
-    <!-- <button type="submit" class="btn btn-success">Enviar</button> -->
+    <button type="submit" class="btn btn-success">Enviar</button>
   </div>
 </form>
 
@@ -88,4 +88,25 @@
 
     return datosFormulario;
   }
+
+  document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const datosFormulario = recogerDatosFormulario();
+
+    const token = localStorage.getItem("token");
+
+    fetch("/admin/carrera/add-pensum", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(datosFormulario),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  });
 </script>
