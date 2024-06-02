@@ -25,11 +25,22 @@ const populateMaterias = async () => {
     }
   }
 
-  try {
-    await Materia.bulkCreate(materiasTransformadas);
-    console.log("Datos guardados correctamente");
-  } catch (error) {
-    console.error("Hubo un error al guardar los datos: ", error);
+  for (const materia of materiasTransformadas) {
+    // Verifica si la materia ya existe en la base de datos
+    const existingMateria = await Materia.findOne({
+      where: { codigo: materia.codigo },
+    });
+
+    // Si la materia no existe, entonces la inserta
+    if (!existingMateria) {
+      await Materia.create(materia)
+        .then(() =>
+          console.log(`Materia ${materia.nombre} creada exitosamente`)
+        )
+        .catch((error) =>
+          console.error(`Error al crear la materia ${materia.nombre}:`, error)
+        );
+    }
   }
 };
 

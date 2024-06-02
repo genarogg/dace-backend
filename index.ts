@@ -45,6 +45,8 @@ import { populateCarreras, populateMaterias } from "./src/config/InicializarDB";
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  populateCarreras();
-  populateMaterias()
+  setTimeout(async () => {
+    await populateCarreras();
+    await populateMaterias();
+  }, 1000);
 });
