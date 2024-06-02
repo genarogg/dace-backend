@@ -1,4 +1,4 @@
 import carreras from "./carreras";
-import pensum from "./pensum";
+import materias from "./materias";
 
-export { carreras, pensum };
+export { carreras, materias };
