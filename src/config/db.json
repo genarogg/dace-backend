@@ -1,8 +1,9 @@
 {
   "pensum": [
     {
-      "id": "e42c",
+      "id": "e44c",
       "IngenieriaInformatica": {
+        "pensumCode": "IS01",
         "Semestre 1": {
           "FUNDAMENTOS DE LA INFORMATICA": {
             "codigo": "IC1222",
@@ -559,6 +560,7 @@
     {
       "id": "e41c",
       "IngenieriaHidroCarburos": {
+        "pensumCode": "IC01",
         "Semestre 1": {
           "FUNDAMENTOS DE LA INFORMATICA": {
             "codigo": "IC1222",

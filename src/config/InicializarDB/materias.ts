@@ -1,29 +1,30 @@
-import { Materia } from "../../models";
-import { pensum } from "./info/index";
+import { Materia, Carrera } from "../../models";
+import { materias } from "./info";
 
 const populateMaterias = async () => {
   try {
-    const data = {};
+    const materiasData = materias();
 
-    const materias = [];
+    // Obtenemos las carreras de la base de datos
+    const carreras = await Carrera.findAll();
 
-    for (const semestre in data) {
-      for (const nombre in data[semestre]) {
-        const materia = data[semestre][nombre];
-        materias.push({
-          nombre: materia.nombre,
-          codigo: materia.codigo,
-          horasTeoricas: materia.horasTeoricas,
-          horasPracticas: materia.horasPracticas,
-          horasSemanales: materia.horasSemanales,
-          uc: materia.uc,
-          prelaciones: materia.prelaciones,
-          semestre: parseInt(semestre.split(" ")[1]),
-        });
+    // Creamos un mapa de carreras para buscarlas por nombre
+    const mapaCarreras = new Map();
+    carreras.forEach((carrera) => {
+      mapaCarreras.set(carrera.nombre, carrera);
+    });
+
+    // Asociamos cada materia a su carrera correspondiente
+    const materiasToInsert = materiasData.map((materia) => {
+      const carrera = mapaCarreras.get(materia.carrera);
+      if (carrera) {
+        materia.carreraId = carrera.id;
       }
-    }
+      return materia;
+    });
 
-    Materia.bulkCreate(materias)
+    // Creamos las materias en la base de datos
+    Materia.bulkCreate(materiasToInsert)
       .then(() => console.log("Materias creadas exitosamente"))
       .catch((error) => console.error("Error al crear materias:", error));
   } catch (error) {

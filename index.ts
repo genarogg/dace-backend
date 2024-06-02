@@ -41,10 +41,10 @@ app.use("/admin", carreraRouter);
 
 dataFakeGeneration("http://localhost:8000", 5); */
 
-import { carreras } from "./src/config/InicializarDB";
+import { populateCarreras, populateMaterias } from "./src/config/InicializarDB";
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-  /* populateMaterias() */
-  carreras();
+  populateCarreras();
+  populateMaterias()
 });

@@ -1,4 +1,4 @@
-import materias from "./materias";
-import carreras from "./carreras";
+import populateMaterias from "./materias";
+import populateCarreras from "./carreras";
 
-export { materias, carreras };
+export { populateMaterias, populateCarreras };
