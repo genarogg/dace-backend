@@ -3,17 +3,32 @@ import carreras from "./info/carreras";
 
 const populateCarreras = async () => {
   try {
-    const carrerasData = [];
+    const carrerasData = [
+      {
+        IngenieriaInformatica: {
+          nombre: "Ingeniería de Sistemas",
+          pensumCode: "IS01",
+          semestral: true,
+          anual: false,
+          estado: true,
+          creditosTotales: 200,
+          facultad: "Ingeniería",
+        },
+        IngenieriaCivil: {
+          nombre: "Ingeniería Civil",
+          pensumCode: "IC01",
+          semestral: true,
+          anual: false,
+          estado: true,
+          creditosTotales: 210,
+          facultad: "Ingeniería",
+        },
+      },
+    ];
 
-    for (const carrera of carreras) {
-      for (const key in carrera) {
-        carrerasData.push(carrera[key]);
-      }
-    }
+    const carrerasToInsert = Object.values(carrerasData[0]);
 
-    console.log();
-
-    Carrera.bulkCreate(carrerasData)
+    Carrera.bulkCreate(carrerasToInsert)
       .then(() => console.log("Carreras creadas exitosamente"))
       .catch((error) => console.error("Error al crear carreras:", error));
   } catch (error) {
