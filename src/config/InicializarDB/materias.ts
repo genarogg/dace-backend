@@ -5,7 +5,7 @@ const populateMaterias = async () => {
   const materiasData = materias();
 
   const materiasTransformadas = [];
-
+  
   for (const carrera of Object.values(materiasData)) {
     for (const [semestre, materias] of Object.entries(
       carrera.IngenieriaInformatica
@@ -25,7 +25,7 @@ const populateMaterias = async () => {
     }
   }
 
-  for (const materia of materiasTransformadas) {
+  for (let materia of materiasTransformadas) {
     // Verifica si la materia ya existe en la base de datos
     const existingMateria = await Materia.findOne({
       where: { codigo: materia.codigo },

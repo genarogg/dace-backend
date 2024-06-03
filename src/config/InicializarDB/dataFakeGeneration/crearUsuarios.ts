@@ -1,4 +1,4 @@
-import { Usuario } from "../../models";
+import { Usuario } from "../../../models";
 
 const crearUsuarios = async (url: string, cantidad: number) => {
   try {

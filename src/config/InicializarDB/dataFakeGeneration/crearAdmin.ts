@@ -7,7 +7,7 @@ const {
   CONTRASENA_ENDPOINT_REGISTRO_ADMIN,
 } = process.env;
 
-import { Usuario } from "../../models";
+import { Usuario } from "../../../models";
 
 const crearAdmin = async (url: string) => {
   const usuarioExistente = await Usuario.findOne({

@@ -31,8 +31,8 @@ const carreras = () => {
       Derecho: {
         nombre: "Derecho",
         pensumCode: "DR01",
-        semestral: true,
-        anual: false,
+        semestral: false,
+        anual: true,
         estado: true,
         creditosTotales: 180,
         facultad: "Ciencias Sociales",
@@ -40,8 +40,8 @@ const carreras = () => {
       Psicologia: {
         nombre: "Psicología",
         pensumCode: "PS01",
-        semestral: true,
-        anual: false,
+        semestral: false,
+        anual: true,
         estado: true,
         creditosTotales: 180,
         facultad: "Ciencias Sociales",

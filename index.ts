@@ -3,7 +3,7 @@ import path from "path";
 
 import dotenv from "dotenv";
 dotenv.config();
-const { PORT } = process.env;
+const { PORT, NODE_ENV } = process.env;
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.use("/login", loginRouter);
 
 app.use("/admin", carreraRouter);
 
-import dataFakeGeneration from "./src/config/dataFakeGeneration/index";
+import dataFakeGeneration from "./src/config/InicializarDB/dataFakeGeneration/index";
 
 import { populateCarreras, populateMaterias } from "./src/config/InicializarDB";
 
@@ -46,10 +46,11 @@ app.listen(PORT, () => {
 
   //Generando datos falsos
   setTimeout(async () => {
-    if (!(process.env.NODE_ENV === "dev")) {
+    if (!NODE_ENV) {
       console.log("No se puede ejecutar en producción");
       return;
     }
+
     console.log("Ejecutando en modo desarrollo");
     await populateCarreras();
     await populateMaterias();
