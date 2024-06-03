@@ -7,8 +7,9 @@ const sequelize = new Sequelize({
   logging: false,
 });
 
-sequelize.sync({ alter: true }).then(() => {
-  console.log(`Database & tables created!`);
-});
+sequelize
+  .sync()
+  .then(() => console.log("Base de datos y tablas creadas"))
+  .catch((error) => console.error("Error al sincronizar:", error));
 
 export default sequelize;

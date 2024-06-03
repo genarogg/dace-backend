@@ -37,16 +37,22 @@ app.use("/login", loginRouter);
 
 app.use("/admin", carreraRouter);
 
-/* import dataFakeGeneration from "./src/dataFakeGeneration/index";
-
-dataFakeGeneration("http://localhost:8000", 5); */
+import dataFakeGeneration from "./src/config/dataFakeGeneration/index";
 
 import { populateCarreras, populateMaterias } from "./src/config/InicializarDB";
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+
+  //Generando datos falsos
   setTimeout(async () => {
+    if (!(process.env.NODE_ENV === "dev")) {
+      console.log("No se puede ejecutar en producción");
+      return;
+    }
+    console.log("Ejecutando en modo desarrollo");
     await populateCarreras();
     await populateMaterias();
+    dataFakeGeneration("http://localhost:8000", 20);
   }, 1000);
 });

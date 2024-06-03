@@ -7,9 +7,21 @@ const {
   CONTRASENA_ENDPOINT_REGISTRO_ADMIN,
 } = process.env;
 
+import { Usuario } from "../../models";
+
 const crearAdmin = async (url: string) => {
+  const usuarioExistente = await Usuario.findOne({
+    where: { cedula: "27369469" },
+  });
+
+  if (usuarioExistente) {
+    return;
+  }
+
   const usuario = {
-    cedula: 25074591,
+    nombre: "Admin",
+    apellido: "Admin",
+    cedula: 27369469,
     correo: CORREO_ADMIN,
     contrasena: CONTRASENA_ADMIN,
     esAdmin: true,

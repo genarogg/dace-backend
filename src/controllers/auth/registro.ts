@@ -13,10 +13,10 @@ const registroGet = async (req: Request, res: Response): Promise<void> => {
 const registroPost = async (req: Request, res: Response) => {
   const { cedula, correo, contrasena, esAdmin, esProfesor, captcha } = req.body;
 
-  if (esAdmin || esProfesor) {
+  if (esAdmin) {
     return res.status(400).send({
       error:
-        "Solo se puede registrar un usuario estudiante desde este endpoint.",
+        "Solo se puede registrar un usuario  o profesor desde este endpoint.",
     });
   }
 
@@ -42,6 +42,7 @@ const registroPost = async (req: Request, res: Response) => {
     correo,
     contrasena: bcrypt.hashSync(contrasena, 10),
     esEstudiante: true,
+    esProfesor,
   })
     .then((usuario) => {
       // console.log("Usuario creado:", usuario);
