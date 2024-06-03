@@ -11,7 +11,17 @@ const registroGet = async (req: Request, res: Response): Promise<void> => {
 };
 
 const registroPost = async (req: Request, res: Response) => {
-  const { cedula, correo, contrasena, esAdmin, esProfesor, captcha } = req.body;
+  const {
+    nombre,
+    apellido,
+    cedula,
+    correo,
+    contrasena,
+    esAdmin,
+    esEstudiante,
+    esProfesor,
+    captcha,
+  } = req.body;
 
   if (esAdmin) {
     return res.status(400).send({
@@ -38,10 +48,12 @@ const registroPost = async (req: Request, res: Response) => {
   }
 
   Usuario.create({
+    nombre,
+    apellido,
     cedula,
     correo,
     contrasena: bcrypt.hashSync(contrasena, 10),
-    esEstudiante: true,
+    esEstudiante: esEstudiante || true,
     esProfesor,
   })
     .then((usuario) => {

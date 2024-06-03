@@ -1,4 +1,16 @@
+import { Usuario } from "../../models";
+
 const crearUsuarios = async (url: string, cantidad: number) => {
+  try {
+    const usuario = await Usuario.findOne({
+      where: { correo: "usuario99@ejemplo.com" },
+    });
+
+    if (usuario) {
+      return;
+    }
+  } catch (error) {}
+
   for (let i = 1; i <= cantidad; i++) {
     const usuario = {
       cedula: i,

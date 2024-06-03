@@ -53,6 +53,6 @@ app.listen(PORT, () => {
     console.log("Ejecutando en modo desarrollo");
     await populateCarreras();
     await populateMaterias();
-    dataFakeGeneration("http://localhost:8000", 20);
+    dataFakeGeneration("http://localhost:8000", 200);
   }, 1000);
 });
