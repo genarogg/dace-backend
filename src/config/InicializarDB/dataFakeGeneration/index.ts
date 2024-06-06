@@ -4,10 +4,10 @@ import crearProfesor from "./crearProfesor";
 import asignarProfesoresAMaterias from "./addProfesorAMateria";
 
 const dataFakeGeneration = async (url: string, cantidad: number) => {
-  await crearAdmin(url);
-  await crearProfesor(url, cantidad);
-  await asignarProfesoresAMaterias();
-  await crearUsuario(url, cantidad * 20);
+  await crearAdmin();
+  await crearProfesor(cantidad);
+  /* await asignarProfesoresAMaterias();
+  await crearUsuario(url, cantidad * 20); */
 };
 
 export default dataFakeGeneration;

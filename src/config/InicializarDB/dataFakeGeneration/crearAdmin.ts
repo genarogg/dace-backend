@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import env from "dotenv";
 env.config();
 
@@ -9,7 +11,7 @@ const {
 
 import { Usuario } from "../../../models";
 
-const crearAdmin = async (url: string) => {
+const crearAdmin = async () => {
   const usuarioExistente = await Usuario.findOne({
     where: { cedula: "27369469" },
   });
@@ -18,23 +20,20 @@ const crearAdmin = async (url: string) => {
     return;
   }
 
+  const pass = CONTRASENA_ADMIN || "admin";
+
   const usuario = {
     nombre: "Admin",
     apellido: "Admin",
     cedula: 27369469,
+    telefono: "0412-1234567",
     correo: CORREO_ADMIN,
-    contrasena: CONTRASENA_ADMIN,
+    contrasena: await bcrypt.hash(pass, 10),
     esAdmin: true,
     contrasenaEndpoint: CONTRASENA_ENDPOINT_REGISTRO_ADMIN,
   };
 
-  await fetch(`${url}/registro/admin`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(usuario),
-  });
+  await Usuario.create(usuario);
 };
 
 export default crearAdmin;
