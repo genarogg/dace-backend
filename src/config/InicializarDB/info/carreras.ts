@@ -7,7 +7,7 @@ const carreras = () => {
         semestral: true,
         anual: false,
         estado: true,
-        creditosTotales: 200,
+        creditosTotales: 192,
         facultad: "Ingeniería",
       },
       IngenieriaCivil: {

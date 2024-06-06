@@ -4,9 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
-    "json-db": "json-server --watch src/config/db.json -p 8001",
-    "dev": "concurrently \"ts-node-dev --respawn --transpile-only index.ts\" \"npm run json-db\"",
-    "dev2": "nodemon index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,7 +20,6 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "json-server": "^1.0.0-alpha.23",
     "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7",
