@@ -4,20 +4,26 @@ import { Materia, ProfesorMateria, Usuario } from "../../models";
 
 const addProfesorAMateriaGet = async (req: Request, res: Response) => {
   try {
-    const materias = await Materia.findAll({
-      include: {
-        model: Usuario,
-        through: { attributes: [] },
-        attributes: ["id", "nombre", "apellido", "correo"],
-      },
-    });
+    const profesoresMaterias = await ProfesorMateria.findAll({});
 
-    res.status(200).json(materias);
+    //buca el profesor y la materia
+    for (const profesorMateria of profesoresMaterias) {
+      const profesor = await Usuario.findByPk(profesorMateria.UsuarioId);
+      const materia = await Materia.findByPk(profesorMateria.MateriaId);
+
+      if (profesor && materia) {
+        profesorMateria.setDataValue("profesor", profesor);
+        profesorMateria.setDataValue("materia", materia);
+      }
+    }
+
+    
+
+    res.status(200).json(profesoresMaterias);
   } catch (error) {
-    console.error("Error obteniendo materias con profesores:", error);
+    console.error("Error obteniendo profesores y materias:", error);
     res.status(500).json({ message: "Error interno del servidor" });
   }
-  /* res.send("addProfesorAMateriaGet"); */
 };
 
 const addProfesorAMateriaPost = async (req: Request, res: Response) => {

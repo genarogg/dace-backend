@@ -28,4 +28,9 @@ ProfesorMateria.init(
   }
 );
 
+import { Usuario, Materia } from "../../index";
+
+ProfesorMateria.belongsTo(Usuario, { foreignKey: "UsuarioId" });
+ProfesorMateria.belongsTo(Materia, { foreignKey: "MateriaId" });
+
 export default ProfesorMateria;
