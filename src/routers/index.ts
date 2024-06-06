@@ -4,4 +4,6 @@ import loginRouter from "./auth/login";
 
 import carreraRouter from "./admin/carrera";
 
-export { inicioRouter, registroRouter, loginRouter, carreraRouter };
+import userRouter from "./usuario";
+
+export { inicioRouter, registroRouter, loginRouter, carreraRouter, userRouter };

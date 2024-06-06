@@ -21,9 +21,6 @@ Usuario.init(
       autoIncrement: true,
       primaryKey: true,
     },
-
-    //datos del usuario
-
     nombre: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -41,35 +38,27 @@ Usuario.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-
     genero: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-
     fechaDeNacimiento: {
       type: DataTypes.DATE,
       allowNull: true,
     },
-
-    //datos de contacto
     correo: {
       type: DataTypes.STRING,
       //unique: true,
       allowNull: true,
     },
-
     telefono: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-
     direccion: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-
-    //datos institucionales
     carrera: {
       type: DataTypes.STRING,
       get: function () {
@@ -80,7 +69,6 @@ Usuario.init(
       },
       allowNull: true,
     },
-
     sede: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -89,8 +77,6 @@ Usuario.init(
       type: DataTypes.STRING,
       defaultValue: "active",
     },
-
-    // roles
     esEstudiante: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -103,8 +89,6 @@ Usuario.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-
-    //otros
     fechaDeCreacion: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
