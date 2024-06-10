@@ -8,6 +8,9 @@ import Materia from "./materia/Materia";
 import Inscripcion from "./materia/Inscripcion";
 
 import ProfesorMateria from "./usuario/relacion/ProfesorMateria";
+import EstudianteMateria from "./usuario/relacion/EstudianteMateria";
+
+import Horario from "./materia/Horario";
 
 export {
   Usuario,
@@ -16,5 +19,7 @@ export {
   RegistroCarrera,
   Materia,
   Inscripcion,
-  ProfesorMateria
+  ProfesorMateria,
+  EstudianteMateria,
+  Horario
 };

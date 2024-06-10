@@ -26,6 +26,11 @@ Inscripcion.init(
         key: "id",
       },
     },
+
+    periodo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     tableName: "inscripciones",

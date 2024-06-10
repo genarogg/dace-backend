@@ -1,36 +1,36 @@
+import bcrypt from "bcrypt";
+
 import { Usuario } from "../../../models";
+import { usuario } from "../info/index";
 
-const crearUsuarios = async (url: string, cantidad: number) => {
-  try {
-    const usuario = await Usuario.findOne({
-      where: { correo: "usuario99@ejemplo.com" },
-    });
+const crearUsuarios = async (cantidad: number) => {
+  const estudiantes = await Usuario.count({
+    where: { esEstudiante: true },
+  });
 
-    if (usuario) {
-      return;
-    }
-  } catch (error) {}
+  if (estudiantes >= cantidad) {
+    console.log(`Ya existen ${cantidad} o más estudiantes. No se crearán más.`);
+    return;
+  }
 
   for (let i = 1; i <= cantidad; i++) {
-    const usuario = {
-      cedula: i,
-      correo: `usuario${i}@ejemplo.com`,
-      contrasena: `contrasena${i}`,
-      esEstudiante: i % 2 === 0, // true para números pares, false para impares
-      esProfesor: i % 3 === 0, // true para múltiplos de 3
-      esAdmin: i % 5 === 0, // true para múltiplos de 5
-      sede: `sede${i}`,
+    const { nombre, apellido, cedula, correo, telefono } = usuario();
+    const contrasena = await bcrypt.hash(`contrasena${i}`, 10);
+
+    const newUser = {
+      nombre,
+      apellido,
+      cedula,
+      correo: correo + "@estudiante.com",
+      telefono,
+      contrasena,
+      esEstudiante: 1,
       status: "active",
-      captcha: "6Le2S9cpAAAAACwmjzPeDgR7AuS64D-fI5KAOouw",
+      sede: "Central",
+      carrera: { nombre: "Ingeniería en Computación" },
     };
 
-    await fetch(`${url}/registro`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(usuario),
-    });
+    await Usuario.create(newUser);
   }
 };
 

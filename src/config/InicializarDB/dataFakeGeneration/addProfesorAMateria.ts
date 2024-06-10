@@ -42,6 +42,7 @@ const asignarProfesoresAMaterias = async () => {
       await ProfesorMateria.create({
         UsuarioId: profesor.id,
         MateriaId: materiasSinAsignar[i].id,
+        periodo: "2021-1",
       });
     }
   }

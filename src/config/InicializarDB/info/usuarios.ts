@@ -72,7 +72,7 @@ const usuario = () => {
   const nombre = usuarioRandom(nombresLatinos);
   const apellido = usuarioRandom(apellidosLatinos);
 
-  const correo = `${nombre}${apellido}@profesor.com`;
+  const correo = `${nombre}${apellido}`;
 
   //numero de cedula aleatorio debe ser de 8 digitos
   const cedula = Math.floor(10000000 + Math.random() * 90000000);

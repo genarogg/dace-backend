@@ -10,6 +10,10 @@ const app = express();
 // Middleware para decodificar el cuerpo de las solicitudes POST
 app.use(express.json());
 
+// configurando cors
+import cors from "cors";
+app.use(cors());
+
 //Conexión a la base de datos
 
 import sequelize from "./src/config/db-conenction";
@@ -29,7 +33,7 @@ import {
   registroRouter,
   loginRouter,
   carreraRouter,
-  userRouter
+  userRouter,
 } from "./src/routers/index";
 
 app.use("/", inicioRouter);
@@ -57,6 +61,6 @@ app.listen(PORT, () => {
     console.log("Ejecutando en modo desarrollo");
     await populateCarreras();
     await populateMaterias();
-    dataFakeGeneration("http://localhost:8000", 100);
+    dataFakeGeneration(100, "http://localhost:8000");
   }, 1000);
 });

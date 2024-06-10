@@ -12,14 +12,6 @@ const {
 import { Usuario } from "../../../models";
 
 const crearAdmin = async () => {
-  const usuarioExistente = await Usuario.findOne({
-    where: { cedula: "27369469" },
-  });
-
-  if (usuarioExistente) {
-    return;
-  }
-
   const pass = CONTRASENA_ADMIN || "admin";
 
   const usuario = {

@@ -21,6 +21,10 @@ ProfesorMateria.init(
       type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
     },
+    periodo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     tableName: "ProfesorMateria",

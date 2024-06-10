@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+/* import { Sequelize } from "sequelize";
 import sequelize from "../../../config/db-conenction";
 
 import { Usuario, Materia, ProfesorMateria } from "../../index";
@@ -16,3 +16,4 @@ Materia.belongsToMany(Usuario, {
 });
 
 export { sequelize, Usuario, Materia, ProfesorMateria };
+ */
