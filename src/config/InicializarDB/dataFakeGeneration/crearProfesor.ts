@@ -21,7 +21,7 @@ const crearProfesor = async (cantidad: number) => {
       nombre,
       apellido,
       cedula,
-      correo: correo + "@profosor.com",
+      correo: correo + "@profesor.com",
       telefono,
       contrasena,
       esProfesor: 1,

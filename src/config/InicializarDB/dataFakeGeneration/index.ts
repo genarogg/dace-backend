@@ -4,8 +4,10 @@ import crearProfesor from "./crearProfesor";
 import asignarProfesoresAMaterias from "./addProfesorAMateria";
 import asignarMateriasAEstudiante from "./addEstudianteMateria";
 import asignarHorariosAMaterias from "./asignarHorariosAMaterias";
-
+import crearProfesorDemo from "./addProfesorDemo";
 import { Usuario } from "../../../models";
+
+import { populateCarreras, populateMaterias } from "../";
 
 const dataFakeGeneration = async (cantidad: number, url: string) => {
   try {
@@ -17,15 +19,16 @@ const dataFakeGeneration = async (cantidad: number, url: string) => {
       console.log("Data fake generada acteriormente");
       return;
     }
-
+    await crearProfesorDemo();
     await crearProfesor(cantidad);
     await asignarProfesoresAMaterias();
     await crearUsuario(cantidad * 20);
     await asignarMateriasAEstudiante();
     await asignarHorariosAMaterias();
+    await populateCarreras();
+    await populateMaterias();
     await crearAdmin();
     console.log("Data fake generada exitosamente");
-    
   } catch (error) {
     console.log("Error al generar data fake", error);
   }

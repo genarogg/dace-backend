@@ -7,9 +7,6 @@ const { PORT, NODE_ENV } = process.env;
 
 const app = express();
 
-// Middleware para decodificar el cuerpo de las solicitudes POST
-app.use(express.json());
-
 // configurando cors
 import cors from "cors";
 app.use(cors());
@@ -27,6 +24,10 @@ app.set("view engine", "ejs");
 
 // Configura la ruta a las vistas
 app.set("views", path.join(__dirname, "/src/views"));
+
+// Middleware para decodificar el cuerpo de las solicitudes POST
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 import {
   inicioRouter,
@@ -46,8 +47,6 @@ app.use("/usuario", userRouter);
 
 import dataFakeGeneration from "./src/config/InicializarDB/dataFakeGeneration/index";
 
-import { populateCarreras, populateMaterias } from "./src/config/InicializarDB";
-
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 
@@ -59,8 +58,7 @@ app.listen(PORT, () => {
     }
 
     console.log("Ejecutando en modo desarrollo");
-    await populateCarreras();
-    await populateMaterias();
+
     dataFakeGeneration(100, "http://localhost:8000");
   }, 1000);
 });

@@ -1,6 +1,11 @@
 import bcrypt from "bcrypt";
 
-import { generarToken, validarCapchat, registrarInicio } from "./fn";
+import {
+  generarToken,
+  validarCapchat,
+  registrarInicio,
+  extraerInfoUser,
+} from "./fn";
 
 import { Request, Response } from "express";
 
@@ -13,7 +18,7 @@ const loginGet = async (req: Request, res: Response): Promise<void> => {
 const loginPost = async (req: Request, res: Response) => {
   const { correo, contrasena, captcha } = req.body;
 
-  console.log(req.body);
+  console.log("Usuario logueado:", correo, contrasena, captcha);
   if (!correo || !contrasena || !captcha) {
     return res.status(200).json({ error: "Faltan campos obligatorios." });
   }
@@ -25,7 +30,6 @@ const loginPost = async (req: Request, res: Response) => {
   }
 
   const usuario = await Usuario.findOne({ where: { correo } });
-
   if (!usuario) {
     // El usuario no existe, envía una respuesta indicando que es incorrecto
     return res.status(400).json({ error: "Usuario no existe" });
@@ -40,8 +44,10 @@ const loginPost = async (req: Request, res: Response) => {
 
   registrarInicio(req, usuario.id);
 
+  const infoUser = extraerInfoUser(usuario);
+
   // Envía el token en la respuesta
-  res.status(200).json({ mensaje: "inicio sesion", token });
+  res.status(200).json({ mensaje: "inicio sesion", token, infoUser });
 };
 
 export { loginGet, loginPost };

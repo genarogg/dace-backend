@@ -12,6 +12,17 @@ class Usuario extends Model {
   public esAdmin!: boolean;
   public sede!: string;
   public carrera!: string[];
+
+  public nombre!: string;
+  public segundoNombre!: string;
+  public apellido!: string;
+  public segundoApellido!: string;
+  public genero!: string;
+  public telefono!: string;
+  public fechaDeNacimiento!: Date;
+  public direccion!: string;
+
+  public parroquia!: string;
 }
 
 Usuario.init(
@@ -25,14 +36,22 @@ Usuario.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    segundoNombre: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     apellido: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    segundoApellido: {
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     cedula: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      //unique: true,
     },
     contrasena: {
       type: DataTypes.STRING,
@@ -56,6 +75,10 @@ Usuario.init(
       allowNull: true,
     },
     direccion: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    parroquia: {
       type: DataTypes.STRING,
       allowNull: true,
     },

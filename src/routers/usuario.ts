@@ -3,15 +3,18 @@ import express from "express";
 const router = express.Router();
 
 import {
-    addProfesorAMateriaGet,
-    addProfesorAMateriaPost,
-    addProfesorAMateriaPut,
-    addProfesorAMateriaDelete,
-  } from "../controllers/usuario";
+  addProfesorAMateriaGet,
+  addProfesorAMateriaPost,
+  usersGet,
+  usersUpdatePut,
+} from "../controllers/usuario";
 
 router.get("/add-materia-a-profesor", addProfesorAMateriaGet);
 
 router.post("/add-materia-a-profesor", addProfesorAMateriaPost);
 
+router.get("/data", usersGet);
+
+router.put("/data", usersUpdatePut);
 
 export default router;

@@ -23,7 +23,7 @@ const updateCarreraPut = async (req: Request, res: Response): Promise<any> => {
   const { correo } = req.body.user;
   const { id } = req.params;
 
-  console.log("llego")
+
   const usuario = await Usuario.findOne({ where: { correo } });
 
   if (!usuario || !usuario?.esAdmin) {
