@@ -22,6 +22,10 @@ EstudianteMateria.init(
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
+    nota: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true,
+    },
     periodo: {
       type: DataTypes.STRING,
       allowNull: false,
