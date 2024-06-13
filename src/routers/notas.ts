@@ -2,10 +2,10 @@ import express from "express";
 
 const router = express.Router();
 
-import { cargarNotasGet, cargarNotasPost }from "../controllers/notas";
+import { cargarNotasGet, cargarNotasPut } from "../controllers/notas";
 
-router.get("/cargar/:id", cargarNotasGet);
+router.get("/cargar", cargarNotasGet);
 
-router.post("/cargar", cargarNotasPost);
+router.put("/cargar", cargarNotasPut);
 
 export default router;

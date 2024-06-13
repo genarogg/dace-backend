@@ -7,6 +7,7 @@ const usersGet = async (req: Request, res: Response): Promise<void> => {
   try {
     const token = req.headers.authorization;
 
+    console.log(token);
     if (!token) {
       res.status(401).json({ error: "No se proporcionó token" });
       return;

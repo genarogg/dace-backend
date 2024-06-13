@@ -1,3 +1,3 @@
-import { cargarNotasGet, cargarNotasPost } from "./notas/cargarNotas";
+import { cargarNotasGet, cargarNotasPut } from "./notas/cargarNotas";
 
-export { cargarNotasGet, cargarNotasPost };
+export { cargarNotasGet, cargarNotasPut };
