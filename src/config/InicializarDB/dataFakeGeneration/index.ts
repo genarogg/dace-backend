@@ -21,12 +21,13 @@ const dataFakeGeneration = async (cantidad: number, url: string) => {
     }
     await crearProfesorDemo();
     await crearProfesor(cantidad);
+    await populateMaterias();
     await asignarProfesoresAMaterias();
     await crearUsuario(cantidad * 20);
     await asignarMateriasAEstudiante();
     await asignarHorariosAMaterias();
     await populateCarreras();
-    await populateMaterias();
+    
     await crearAdmin();
     console.log("Data fake generada exitosamente");
   } catch (error) {

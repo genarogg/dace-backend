@@ -6,4 +6,13 @@ import carreraRouter from "./admin/carrera";
 
 import userRouter from "./usuario";
 
-export { inicioRouter, registroRouter, loginRouter, carreraRouter, userRouter };
+import notasRouter from "./notas";
+
+export {
+  inicioRouter,
+  registroRouter,
+  loginRouter,
+  carreraRouter,
+  userRouter,
+  notasRouter,
+};

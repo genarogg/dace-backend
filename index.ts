@@ -35,6 +35,7 @@ import {
   loginRouter,
   carreraRouter,
   userRouter,
+  notasRouter
 } from "./src/routers/index";
 
 app.use("/", inicioRouter);
@@ -44,6 +45,7 @@ app.use("/login", loginRouter);
 app.use("/admin", carreraRouter);
 
 app.use("/usuario", userRouter);
+app.use("/notas", notasRouter);
 
 import dataFakeGeneration from "./src/config/InicializarDB/dataFakeGeneration/index";
 

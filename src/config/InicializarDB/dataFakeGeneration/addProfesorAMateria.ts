@@ -3,7 +3,11 @@ import { Usuario, Materia, ProfesorMateria } from "../../../models";
 
 const asignarProfesoresAMaterias = async () => {
   // Obtener todos los profesores
+  
+  console.log("Asignando profesores a materias");
+  
   const profesores = await Usuario.findAll({ where: { esProfesor: 1 } });
+
 
   // Para cada profesor
   for (const profesor of profesores) {
