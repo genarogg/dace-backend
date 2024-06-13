@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+
 import { Usuario } from "../../models";
 
 import verificarToken from "../auth/fn/verificarToken";
 
-const usersUpdatePut = async (req: Request, res: Response): Promise<void> => {
+const usersUpdatePut = async (req: Request, res: Response): Promise<any> => {
   try {
     const token = req.headers.authorization;
 
@@ -40,7 +42,22 @@ const usersUpdatePut = async (req: Request, res: Response): Promise<void> => {
       sex: genero,
       parroquia,
       etnia,
+      oldPassword,
+      password,
     } = req.body;
+
+    if (password) {
+      //comprueba si la contraseña anterior es correcta
+      if (!bcrypt.compareSync(oldPassword, user.contrasena)) {
+        return res
+          .status(400)
+          .json({ error: "contraseña anterior incorrectos" });
+      }
+
+      await user.update({ contrasena: bcrypt.hashSync(password, 10) });
+
+      return res.status(200).json({ message: "Contraseña actualizada" });
+    }
 
     if (nombre) {
       const newData = {
@@ -58,8 +75,7 @@ const usersUpdatePut = async (req: Request, res: Response): Promise<void> => {
       };
       await user.update(newData);
 
-      res.status(200).json({ message: "Usuario actualizado" });
-      return;
+      return res.status(200).json({ message: "Usuario actualizado" });
     }
   } catch (error) {
     res.status(500).json({ error: "Error al actualizar el usuario" });
