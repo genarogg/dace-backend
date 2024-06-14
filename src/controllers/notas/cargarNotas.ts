@@ -76,9 +76,7 @@ const cargarNotasGet = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Hubo un error al obtener las materias" });
   }
 };
-const cargarNotasPut = async (req: Request, res: Response) => {};
-
-const subirNotasPut = async (req: Request, res: Response) => {
+const cargarNotasPut = async (req: Request, res: Response) => {
   try {
     const token = req.headers.authorization;
 
@@ -115,14 +113,16 @@ const subirNotasPut = async (req: Request, res: Response) => {
       // Comprueba si la nota del estudiante no es null
       if (estudiante.nota !== null) {
         // Actualiza la nota del estudiante
-        await EstudianteMateria.update({ nota: estudiante.nota }, {
-          where: {
-            id: estudiante.id
+        await EstudianteMateria.update(
+          { nota: estudiante.nota },
+          {
+            where: {
+              id: estudiante.id,
+            },
           }
-        });
+        );
       }
     }
-
 
     res.json({ message: "Notas actualizadas correctamente" });
   } catch (error) {
@@ -130,4 +130,5 @@ const subirNotasPut = async (req: Request, res: Response) => {
   }
 };
 
-export { cargarNotasGet, cargarNotasPut, subirNotasPut };
+
+export { cargarNotasGet, cargarNotasPut };
