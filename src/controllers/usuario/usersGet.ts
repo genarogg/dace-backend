@@ -4,10 +4,11 @@ import { Usuario } from "../../models";
 import verificarToken from "../auth/fn/verificarToken";
 
 const usersGet = async (req: Request, res: Response): Promise<void> => {
+  console.log("Obteniendo usuarios");
+
   try {
     const token = req.headers.authorization;
 
-    console.log(token);
     if (!token) {
       res.status(401).json({ error: "No se proporcionó token" });
       return;
@@ -24,7 +25,10 @@ const usersGet = async (req: Request, res: Response): Promise<void> => {
 
     const user = await Usuario.findOne({ where: { id } });
 
-    user?.fechaDeNacimiento.toISOString().split("T")[0];
+    let birthdate = "";
+    if (user?.fechaDeNacimiento instanceof Date) {
+      birthdate = user.fechaDeNacimiento.toISOString().split("T")[0];
+    }
 
     const data = {
       email: user?.correo,
@@ -32,7 +36,7 @@ const usersGet = async (req: Request, res: Response): Promise<void> => {
       secondName: user?.segundoNombre,
       firstSurname: user?.apellido,
       secondSurname: user?.segundoApellido,
-      birthdate: user?.fechaDeNacimiento.toISOString().split("T")[0],
+      birthdate,
       direction: user?.direccion,
       phoneNumber: user?.telefono,
       sex: user?.genero,

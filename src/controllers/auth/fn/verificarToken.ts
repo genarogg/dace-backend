@@ -1,12 +1,7 @@
 import jwt from "jsonwebtoken";
 
 interface Usuario {
-  correo: string;
-  cedula: number;
   id: number;
-  esEstudiante: boolean;
-  esProfesor: boolean;
-  esAdmin: boolean;
 }
 
 const verificarToken = (token: string): Usuario | null => {
