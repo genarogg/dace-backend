@@ -18,18 +18,20 @@ const loginGet = async (req: Request, res: Response): Promise<void> => {
 const loginPost = async (req: Request, res: Response) => {
   const { correo, contrasena, captcha } = req.body;
 
-  console.log("Usuario logueado:", correo, contrasena, captcha);
-  if (!correo || !contrasena || !captcha) {
-    return res.status(200).json({ error: "Faltan campos obligatorios." });
+  //comentado para pruebas
+
+  /*  if (!correo || !contrasena || !captcha) {
+    return res.status(400).json({ error: "Faltan campos obligatorios." });
   }
 
   const captchaResponse = await validarCapchat(captcha);
 
   if (!captchaResponse) {
-    return res.status(200).json({ error: "Captcha no válido." });
-  }
+    return res.status(400).json({ error: "Captcha no válido." });
+  } */
 
   const usuario = await Usuario.findOne({ where: { correo } });
+
   if (!usuario) {
     // El usuario no existe, envía una respuesta indicando que es incorrecto
     return res.status(400).json({ error: "Usuario no existe" });

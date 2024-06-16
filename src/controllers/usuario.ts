@@ -9,6 +9,8 @@ import { usersGet } from "./usuario/usersGet";
 
 import { usersUpdatePut } from "./usuario/usersUpdate";
 
+import { horarioGet } from "./usuario/horario";
+
 export {
   addProfesorAMateriaGet,
   addProfesorAMateriaPost,
@@ -16,4 +18,5 @@ export {
   addProfesorAMateriaDelete,
   usersGet,
   usersUpdatePut,
+  horarioGet
 };

@@ -9,7 +9,7 @@ import {
   updateCarreraPut,
 } from "../../controllers/carrera";
 
-import checkRole from "../middleware/checkRole";
+
 
 const router = express.Router();
 
@@ -18,12 +18,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/carrera/add-pensum", addPensumGet);
-router.post("/carrera/add-pensum", checkRole("esAdmin"), addPensumPost);
+router.post("/carrera/add-pensum", addPensumPost);
 
 router.get("/carrera/add-carrera", addCarreraGet);
-router.post("/carrera/add-carrera", checkRole("esAdmin"), addCarreraPost);
+router.post("/carrera/add-carrera", addCarreraPost);
 
 router.get("/carrera/update-carrera", updateCarreraGet);
-router.put("/carrera/update-carrera/:id", checkRole("esAdmin"), updateCarreraPut);
+router.put("/carrera/update-carrera/:id", updateCarreraPut);
 
 export default router;

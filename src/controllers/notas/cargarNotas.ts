@@ -49,16 +49,24 @@ const cargarNotasGet = async (req: Request, res: Response) => {
       profesorMaterias.map(async (profesorMateria) => {
         const materia = await Materia.findByPk(profesorMateria.MateriaId);
         const estudiantes = await EstudianteMateria.findAll({
-          where: { materiaId: profesorMateria.MateriaId },
+          where: {
+            materiaId: profesorMateria.MateriaId,
+            //nota: null, // Solo devuelve los estudiantes cuya nota sea null
+          },
         });
         const estudiantesConInfo = await Promise.all(
           estudiantes.map(async (estudiante) => {
             const usuario = await Usuario.findByPk(estudiante.usuarioId);
+
+            if (!usuario) {
+              return null;
+            }
+            
             return {
               ...estudiante.toJSON(),
-              cedula: usuario ? usuario.cedula : null,
-              nombre: usuario ? usuario.nombre : null,
-              apellido: usuario ? usuario.apellido : null,
+              cedula: usuario.cedula,
+              nombre: usuario.nombre,
+              apellido: usuario.apellido,
             };
           })
         );
@@ -109,6 +117,8 @@ const cargarNotasPut = async (req: Request, res: Response) => {
     }
     const data = req.body;
 
+
+
     for (const estudiante of data.estudiantes) {
       // Comprueba si la nota del estudiante no es null
       if (estudiante.nota !== null) {
@@ -129,6 +139,5 @@ const cargarNotasPut = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Hubo un error al cargar las notas" });
   }
 };
-
 
 export { cargarNotasGet, cargarNotasPut };

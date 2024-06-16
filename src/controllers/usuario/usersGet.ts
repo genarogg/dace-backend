@@ -4,7 +4,7 @@ import { Usuario } from "../../models";
 import verificarToken from "../auth/fn/verificarToken";
 
 const usersGet = async (req: Request, res: Response): Promise<void> => {
-  console.log("Obteniendo usuarios");
+
 
   try {
     const token = req.headers.authorization;
